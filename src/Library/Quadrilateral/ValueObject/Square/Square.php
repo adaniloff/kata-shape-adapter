@@ -2,10 +2,7 @@
 
 namespace App\Library\Quadrilateral\ValueObject\Square;
 
-use App\Library\Quadrilateral\ValueObject\QuadrilateralInterface;
-use App\Library\Quadrilateral\ValueObject\Rectangle\Rectangle;
-
-class Square extends Rectangle
+class Square implements SquareInterface
 {
     private $l;
 
@@ -14,25 +11,16 @@ class Square extends Rectangle
     public function __construct(int $l)
     {
         $this->l = $l;
-        parent::__construct($l, $l);
     }
 
-    public function setLength(int $l): QuadrilateralInterface
+    public function getLength(): int
     {
-        return $this->setIdenticalLengthWidth($l);
+        return $this->l;
     }
 
-    public function setWidth(int $w): QuadrilateralInterface
+    public function getWidth(): int
     {
-        return $this->setIdenticalLengthWidth($w);
-    }
-
-    private function setIdenticalLengthWidth(int $l): self
-    {
-        parent::setLength($l);
-        parent::setWidth($l);
-
-        return $this;
+        return $this->l;
     }
 
     public function __toString()

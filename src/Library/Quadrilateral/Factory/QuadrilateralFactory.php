@@ -2,13 +2,13 @@
 
 namespace App\Library\Quadrilateral\Factory;
 
+use App\Library\Quadrilateral\ValueObject\QuadrilateralInterface;
 use App\Library\Quadrilateral\ValueObject\Rectangle\Rectangle;
-use App\Library\Quadrilateral\ValueObject\Rectangle\RectangleInterface;
 use App\Library\Quadrilateral\ValueObject\Square\Square;
 
-class RectangleFactory
+class QuadrilateralFactory
 {
-    public static function create(int $w, ?int $h): RectangleInterface
+    public static function create(int $w, ?int $h): QuadrilateralInterface
     {
         switch (true) {
             case null !== $w && (null === $h || $h === $w):

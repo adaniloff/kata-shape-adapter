@@ -2,12 +2,12 @@
 
 namespace App\Tests;
 
-use App\Library\Quadrilateral\RectangleUtil;
+use App\Library\Quadrilateral\QuadrilateralUtil;
 use App\Library\Quadrilateral\ValueObject\Rectangle\Rectangle;
 use App\Library\Quadrilateral\ValueObject\Square\Square;
 use PHPUnit\Framework\TestCase;
 
-class RectangleUtilTest extends TestCase
+class QuadrilateralUtilTest extends TestCase
 {
     public function testRectangleArea()
     {
@@ -15,7 +15,7 @@ class RectangleUtilTest extends TestCase
         $w = 15;
 
         $rectangle = new Rectangle($l, $w);
-        $this->assertEquals($l * $w, RectangleUtil::area($rectangle));
+        $this->assertEquals($l * $w, QuadrilateralUtil::area($rectangle));
     }
 
     public function testRectanglePerimeter()
@@ -24,7 +24,7 @@ class RectangleUtilTest extends TestCase
         $w = 15;
 
         $rectangle = new Rectangle($l, $w);
-        $this->assertEquals($l * 2 + $w * 2, RectangleUtil::perimeter($rectangle));
+        $this->assertEquals($l * 2 + $w * 2, QuadrilateralUtil::perimeter($rectangle));
     }
 
     public function testSquareArea()
@@ -32,7 +32,7 @@ class RectangleUtilTest extends TestCase
         $l = 10;
 
         $square = new Square($l);
-        $this->assertEquals(pow($l, 2), RectangleUtil::area($square));
+        $this->assertEquals(pow($l, 2), QuadrilateralUtil::area($square));
     }
 
     public function testSquarePerimeter()
@@ -40,6 +40,6 @@ class RectangleUtilTest extends TestCase
         $l = 10;
 
         $square = new Square($l);
-        $this->assertEquals($l * 4, RectangleUtil::perimeter($square));
+        $this->assertEquals($l * 4, QuadrilateralUtil::perimeter($square));
     }
 }

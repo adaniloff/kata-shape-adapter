@@ -2,8 +2,8 @@
 
 namespace App\Command;
 
-use App\Library\Quadrilateral\Factory\RectangleFactory;
-use App\Library\Quadrilateral\RectangleUtil;
+use App\Library\Quadrilateral\Factory\QuadrilateralFactory;
+use App\Library\Quadrilateral\QuadrilateralUtil;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,9 +36,9 @@ class QuadrilateralAreaCommand extends Command
             $io->note(sprintf('You passed a width of: %s', $width));
         }
 
-        $quadrilateral = RectangleFactory::create($length, $width ?? null);
+        $quadrilateral = QuadrilateralFactory::create($length, $width ?? null);
         $io->success('Your item is a: '.(string)$quadrilateral);
-        $io->success('The area is: '.RectangleUtil::area($quadrilateral));
+        $io->success('The area is: '.QuadrilateralUtil::area($quadrilateral));
 
         $questionHelper = $this->getHelper('question');
         $question = new ChoiceQuestion('Would you like to set a new width ?', ['no (default)', 'yes'], 0);
@@ -47,10 +47,10 @@ class QuadrilateralAreaCommand extends Command
         if ('yes' === $questionHelper->ask($input, $output, $question)) {
             $question = new Question('Please enter the new width:');
             $newWidth = $questionHelper->ask($input, $output, $question);
-            $quadrilateral->setWidth($newWidth);
+            $quadrilateral = QuadrilateralFactory::create($length, $newWidth);
         }
 
-        $io->success('Your item is still a: '.(string)$quadrilateral);
-        $io->success('The new area of your item is: '.RectangleUtil::area($quadrilateral));
+        $io->success('Your item is now a: '.(string)$quadrilateral);
+        $io->success('The new area of your item is: '.QuadrilateralUtil::area($quadrilateral));
     }
 }

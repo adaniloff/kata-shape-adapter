@@ -2,8 +2,6 @@
 
 namespace App\Library\Quadrilateral\ValueObject\Rectangle;
 
-use App\Library\Quadrilateral\ValueObject\QuadrilateralInterface;
-
 class Rectangle implements RectangleInterface
 {
     private $l;
@@ -15,20 +13,6 @@ class Rectangle implements RectangleInterface
     {
         $this->l = $l;
         $this->w = $w;
-    }
-
-    public function setLength(int $l): QuadrilateralInterface
-    {
-        $this->l = $l;
-
-        return $this;
-    }
-
-    public function setWidth(int $w): QuadrilateralInterface
-    {
-        $this->w = $w;
-
-        return $this;
     }
 
     public function getLength(): int
