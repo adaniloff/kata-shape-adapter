@@ -2,14 +2,14 @@
 
 namespace App\Command;
 
+use App\Adapter\RoundAdapter;
 use App\Library\Quadrilateral\Factory\QuadrilateralFactory;
-use App\Library\Quadrilateral\QuadrilateralUtil;
+use App\Library\Quadrilateral\ValueObject\QuadrilateralInterface;
 use App\Library\Quadrilateral\ValueObject\Rectangle\Rectangle;
 use App\Library\Quadrilateral\ValueObject\Square\Square;
 use App\Library\Round\RoundUtil;
 use App\Library\Round\ValueObject\Round\Round;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
@@ -33,12 +33,11 @@ class RoundAreaCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $item = $this->askForAnItem($input, $output);
-
-        if ($item instanceof Round) {
-            $io->success('The round area of the item is: ' . RoundUtil::area($item));
-        } else {
-            $io->success('The round area of the item is: ' . QuadrilateralUtil::area($item));
+        if ($item instanceof QuadrilateralInterface) {
+            $item = new RoundAdapter($item);
         }
+
+        $io->success('The round area of the item is: ' . RoundUtil::area($item));
     }
 
     private function askForAnItem(InputInterface $input, OutputInterface $output)
